@@ -1,0 +1,96 @@
+<h3>Stock Profit</h3>
+@if (!display){
+    <p-progress-spinner #spn  strokeWidth="8" fill="transparent" />
+} 
+@else{
+    <div class="mb-2">
+        <p-button label="Refresh Grid" (onClick)="onRefreshGridClicked()"/>
+        <p-button label="Create Profit" (onClick)="onCreateProfitClicked()"  class="ml-2"/>
+        <p-button label="Edit Profit" (onClick)="onEditProfitClicked()"  class="ml-2"/>
+        <p-button label="Delete Profit" (onClick)="onDeleteProfitClicked()"  class="ml-2"/>
+        <p-button label="Set Zakah Date" (onClick)="onSetZakahDateClicked()"  class="ml-2"/>
+    </div>
+}
+@if(stockProfitList != undefined && stockProfitList != null){
+    <p-table [value]="stockProfitList" selectionMode="single" [metaKeySelection]="true" dataKey="ST_PROFIT_ID" [(selection)]="selectedItem" stripedRows showGridlines [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template #header>
+        <tr>
+            <th pSortableColumn="TRAND_ID" style="width:7%; ">
+                <div class="flex items-center gap-2">
+                    Trans Id
+                    <p-sortIcon field="TRAND_ID" />
+                </div>
+            </th>
+            <th pSortableColumn="TRANS_DATE" style="width:6%; ">
+                <div class="flex items-center gap-2">
+                    Trans Date
+                    <p-sortIcon field="TRANS_DATE" />
+                </div>
+            </th>
+            <th pSortableColumn="STOCK_SYMBOL" style="width:7%; ">
+                <div class="flex items-center gap-2">
+                    Stock Symbol
+                    <p-sortIcon field="STOCK_SYMBOL" />
+                </div>
+            </th>
+            <th pSortableColumn="CCOMPANY_NAME" style="width:9%; ">
+                <div class="flex items-center gap-2">
+                    Company
+                    <p-sortIcon field="CCOMPANY_NAME" />
+                </div>
+            </th>
+            <th pSortableColumn="NO_STOCKS" style="width:9%; ">
+                <div class="flex items-center gap-2">
+                    Stocks
+                    <p-sortIcon field="NO_STOCKS" />
+                </div>
+            </th>
+            <th pSortableColumn="TOT_MARKET_SALE_TAX" style="width:9%; ">
+                <div class="flex items-center gap-2">
+                    Market Price
+                    <p-sortIcon field="TOT_MARKET_SALE_TAX" />
+                </div>
+            </th>
+            <th pSortableColumn="VALUE_BASED_CURR_PRICE" style="width:9%; ">
+                <div class="flex items-center gap-2">
+                    Current Value $
+                    <p-sortIcon field="VALUE_BASED_CURR_PRICE" />
+                </div>
+            </th>
+            <th pSortableColumn="PROFIT_VALUE" style="width:9%; ">
+                <div class="flex items-center gap-2">
+                    Profit Value $
+                    <p-sortIcon field="PROFIT_VALUE" />
+                </div>
+            </th>
+            <th pSortableColumn="PROFIT_PERCENT" style="width:9%; ">
+                <div class="flex items-center gap-2">
+                    Profit %
+                    <p-sortIcon field="PROFIT_PERCENT" />
+                </div>
+            </th>
+            <th pSortableColumn="ZAKAH_VALUE" style="width:9%; ">
+                <div class="flex items-center gap-2">
+                    Zakah Value $
+                    <p-sortIcon field="ZAKAH_VALUE" />
+                </div>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-item>
+        <tr [pSelectableRow]="item">
+            <td>{{ item.TRAND_ID }}</td>
+            <td>{{ item.TRANS_DATE | date: 'mediumDate'}}</td>
+            <td>{{ item.STOCK_SYMBOL }}</td>
+            <td>{{ item.CCOMPANY_NAME }}</td>
+            <td>{{ item.NO_STOCKS | number: '.2'}}</td>
+            <td [ngClass]="item.TOT_MARKET_SALE_TAX < 0? 'NegativeNumber':'PositiveNumber'">{{ item.TOT_MARKET_SALE_TAX | number: '.2' | minusSignToParens}}</td>
+            <td [ngClass]="item.VALUE_BASED_CURR_PRICE < 0? 'NegativeNumber':'PositiveNumber'">{{ item.VALUE_BASED_CURR_PRICE | number: '.2' | minusSignToParens}}</td>
+            <td [ngClass]="item.PROFIT_VALUE < 0? 'NegativeNumber':'PositiveNumber'">{{ item.PROFIT_VALUE | number: '.2' | minusSignToParens}}</td>
+            <td [ngClass]="item.PROFIT_PERCENT < 0? 'NegativeNumber':'PositiveNumber'">{{ item.PROFIT_PERCENT | number: '.2' | minusSignToParens}}</td>
+            <td [ngClass]="item.ZAKAH_VALUE < 0? 'NegativeNumber':'PositiveNumber'">{{ item.ZAKAH_VALUE | number: '.2' | minusSignToParens}}</td>
+        </tr>
+    </ng-template>
+</p-table>
+}
+

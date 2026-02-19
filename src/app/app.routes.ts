@@ -1,0 +1,42 @@
+import { Routes } from '@angular/router';
+import { GoldProfit } from './gold-profit/gold-profit';
+import { ReportProfit } from './report-profit/report-profit';
+import { CryptoProfit } from './crypto-profit/crypto-profit';
+import { PlatinumProfit } from './platinum-profit/platinum-profit';
+import { SilverProfit } from './silver-profit/silver-profit';
+import { StockProfit } from './stock-profit/stock-profit';
+import { RealProfit } from './real-profit/real-profit';
+import { CreateGoldProfit } from './create-gold-profit/create-gold-profit';
+import { CreateCryptoProfit } from './create-crypto-profit/create-crypto-profit';
+import { CreatePlatinumProfit } from './create-platinum-profit/create-platinum-profit';
+import { CreateRealProfit } from './create-real-profit/create-real-profit';
+import { CreateSilverProfit } from './create-silver-profit/create-silver-profit';
+import { CreateStockProfit } from './create-stock-profit/create-stock-profit';
+import { EditCryptoProfit } from './edit-crypto-profit/edit-crypto-profit';
+import { EditGoldProfit } from './edit-gold-profit/edit-gold-profit';
+import { EditPlatinumProfit } from './edit-platinum-profit/edit-platinum-profit';
+import { EditRealProfit } from './edit-real-profit/edit-real-profit';
+import { EditSilverProfit } from './edit-silver-profit/edit-silver-profit';
+import { EditStockProfit } from './edit-stock-profit/edit-stock-profit';
+
+export const routes: Routes = [
+    { path: 'reportProfit', component: ReportProfit },
+    { path: 'goldProfit', component: GoldProfit },
+    { path: 'cryptoProfit', component: CryptoProfit },
+    { path: 'platinumProfit', component: PlatinumProfit },
+    { path: 'silverProfit', component: SilverProfit },
+    { path: 'stockProfit', component: StockProfit },
+    { path: 'realProfit', component: RealProfit },
+    { path: 'createCryptoProfit', component: CreateCryptoProfit },
+    { path: 'createGoldProfit', component: CreateGoldProfit },
+    { path: 'createPlatinumProfit', component: CreatePlatinumProfit },
+    { path: 'createRealProfit', component: CreateRealProfit },
+    { path: 'createSilverProfit', component: CreateSilverProfit },
+    { path: 'createStockProfit', component: CreateStockProfit },
+    { path: 'editCryptoProfit/:id', component: EditCryptoProfit },
+    { path: 'editGoldProfit/:id', component: EditGoldProfit },
+    { path: 'editPlatinumProfit/:id', component: EditPlatinumProfit },
+    { path: 'editRealProfit/:id', component: EditRealProfit },
+    { path: 'editSilverProfit/:id', component: EditSilverProfit },
+    { path: 'editStockProfit/:id', component: EditStockProfit },
+];

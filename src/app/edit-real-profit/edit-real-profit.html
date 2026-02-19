@@ -1,0 +1,39 @@
+<h3>Real Profit</h3>
+@if (!display){
+<p-progress-spinner #spn strokeWidth="8" fill="transparent" />
+}
+@else{
+<div class="card flex justify-center">
+    <form [formGroup]="saveForm" (ngSubmit)="onSubmit()" class="flex flex-column gap-3 w-full sm:w-56">
+        <div class="flex flex-column">
+            <input pInputText type="number" id="TRAND_ID" placeholder="Trans Id" formControlName="TRAND_ID"
+                [invalid]="isInvalid('TRAND_ID')" />
+            @if (isInvalid('TRAND_ID')) {
+            <p-message severity="error" size="small" variant="simple">Trans Id is required.</p-message>
+            }
+        </div>
+        <div class="flex flex-column">
+            <input pInputText type="date" id="TRANS_DATE" placeholder="Trans Date" formControlName="TRANS_DATE"
+                [invalid]="isInvalid('TRANS_DATE')" />
+            @if (isInvalid('TRANS_DATE')) {
+            <p-message severity="error" size="small" variant="simple">Trans Date is required.</p-message>
+            }
+        </div>
+        <div class="flex flex-column">
+            <input pInputText type="date" id="ZAKAH_DATE" placeholder="Zakah Date" formControlName="ZAKAH_DATE"
+                [invalid]="isInvalid('ZAKAH_DATE')" />
+            @if (isInvalid('ZAKAH_DATE')) {
+            <p-message severity="error" size="small" variant="simple">Zakah Date is required.</p-message>
+            }
+        </div>
+        <div class="flex flex-column gap-1">
+            <input pInputText type="number" id="TOT_PRICE" placeholder="Price" formControlName="TOT_PRICE"
+                [invalid]="isInvalid('TOT_PRICE')" />
+            @if (isInvalid('TOT_PRICE')) {
+            <p-message severity="error" size="small" variant="simple">Price is required.</p-message>
+            }
+        </div>
+        <button pButton type="submit"><span pButtonLabel>Save Profit</span></button>
+    </form>
+</div>
+}

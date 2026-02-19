@@ -1,0 +1,83 @@
+@if (!display){
+    <p-progress-spinner #spn  strokeWidth="8" fill="transparent" />
+} 
+@else{
+    <p-button label="Refresh Grid" (onClick)="onRefreshGridClieckd()" />
+}
+@if(profiteStatsList != undefined && profiteStatsList != null){
+
+    <div class="card flex justify-center mt-5" style="width: 60rem; height: 20rem;">
+        <p-chart type="doughnut" [data]="InvestValueData" [options]="options" class="w-full md:w-[30rem]" />
+        <p-chart type="doughnut" [data]="ProfitValueData" [options]="options" class="w-full md:w-[30rem]" />
+    </div>
+    
+    <p-table [value]="profiteStatsList" stripedRows showGridlines [tableStyle]="{ 'min-width': '50rem' }" class="mt-5">
+    <ng-template #header>
+        <tr>
+            <th pSortableColumn="INVEST_ASSET" style="width:8%; ">
+                <div class="flex items-center gap-2">
+                    Asset Name
+                    <p-sortIcon field="INVEST_ASSET" />
+                </div>
+            </th>
+            <th pSortableColumn="TOT_NO_OZ" style="width:7%; ">
+                <div class="flex items-center gap-2">
+                    Total OZ
+                    <p-sortIcon field="TOT_NO_OZ" />
+                </div>
+            </th>
+            <th pSortableColumn="TOT_INVEST_VALUE" style="width:15%; ">
+                <div class="flex items-center gap-2">
+                    Total Investment $
+                    <p-sortIcon field="TOT_INVEST_VALUE" />
+                </div>
+            </th>
+            <th pSortableColumn="TOT_CURRENT_VALUE" style="width:15%; ">
+                <div class="flex items-center gap-2">
+                    Current Value $
+                    <p-sortIcon field="TOT_CURRENT_VALUE" />
+                </div>
+            </th>
+            <th pSortableColumn="TOT_PROFIT_VALUE" style="width:15%; ">
+                <div class="flex items-center gap-2">
+                    Profit Value $
+                    <p-sortIcon field="TOT_PROFIT_VALUE" />
+                </div>
+            </th>
+            <th pSortableColumn="PROFIT_PERCENT" style="width:15%; ">
+                <div class="flex items-center gap-2">
+                    Profit %
+                    <p-sortIcon field="PROFIT_PERCENT" />
+                </div>
+            </th>
+            <th pSortableColumn="TOT_ZAKAH_VALUE" style="width:9%; ">
+                <div class="flex items-center gap-2">
+                    Zakah Value $
+                    <p-sortIcon field="TOT_ZAKAH_VALUE" />
+                </div>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-stats>
+        <tr>
+            <td>{{ stats.INVEST_ASSET }}</td>
+            <td>{{ stats.TOT_NO_OZ | number: '.2'}}</td>
+            <td [ngClass]="stats.TOT_INVEST_VALUE < 0? 'NegativeNumber':'PositiveNumber'">{{ stats.TOT_INVEST_VALUE | number: '.2' | minusSignToParens}}</td>
+            <td [ngClass]="stats.TOT_CURRENT_VALUE < 0? 'NegativeNumber':'PositiveNumber'">{{ stats.TOT_CURRENT_VALUE | number: '.2' | minusSignToParens}}</td>
+            <td [ngClass]="stats.TOT_PROFIT_VALUE < 0? 'NegativeNumber':'PositiveNumber'">{{ stats.TOT_PROFIT_VALUE | number: '.2' | minusSignToParens}}</td>
+            <td [ngClass]="stats.PROFIT_PERCENT < 0? 'NegativeNumber':'PositiveNumber'">{{ stats.PROFIT_PERCENT | number: '.2' | minusSignToParens}}</td>
+            <td [ngClass]="stats.TOT_ZAKAH_VALUE < 0? 'NegativeNumber':'PositiveNumber'">{{ stats.TOT_ZAKAH_VALUE | number: '.2' | minusSignToParens}}</td>
+        </tr>
+    </ng-template>
+    <ng-template #footer>
+        <tr>
+            <td colspan="2">Total</td>
+            <td [ngClass]="GetTotInvestAsset() < 0? 'NegativeNumber':'PositiveNumber'">{{GetTotInvestAsset() | number: '.2' | minusSignToParens}}</td>
+            <td [ngClass]="GetTotCurrentValue() < 0? 'NegativeNumber':'PositiveNumber'">{{GetTotCurrentValue() | number: '.2' | minusSignToParens}}</td>
+            <td [ngClass]="GetTotProfitValue() < 0? 'NegativeNumber':'PositiveNumber'">{{GetTotProfitValue() | number: '.2' | minusSignToParens}}</td>
+            <td [ngClass]="GetTotProfitPercent() < 0? 'NegativeNumber':'PositiveNumber'">{{GetTotProfitPercent() | number: '.2' | minusSignToParens}}</td>
+            <td [ngClass]="GetTotZakahValue() < 0? 'NegativeNumber':'PositiveNumber'">{{GetTotZakahValue() | number: '.2' | minusSignToParens}}</td>
+        </tr>
+    </ng-template>
+</p-table>
+}
